@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<title>Duck (original)</title>
+<path d="M146,96 q22,-14 30,2 q-18,10 -30,6 Z" fill="#e8e2d4"/><ellipse cx="98" cy="116" rx="58" ry="36" fill="#f7f4ec"/><path d="M62,104 q30,22 62,8 q-28,18 -62,-8 Z" fill="#e0d9c8"/><circle cx="52" cy="80" r="22" fill="#f7f4ec"/><polygon points="30,76 8,84 30,94" fill="#f2a007" stroke-linejoin="round"/><polygon points="30,88 14,92 30,98" fill="#e07a2f" stroke-linejoin="round"/><circle cx="54" cy="76" r="4.4" fill="#26221f"/><line x1="88" y1="150" x2="88" y2="166" stroke="#e07a2f" stroke-width="5" stroke-linecap="round"/><line x1="112" y1="150" x2="112" y2="166" stroke="#e07a2f" stroke-width="5" stroke-linecap="round"/><ellipse cx="100" cy="178" rx="66" ry="9" fill="#9fc2d8" opacity="0.8"/>
+</svg>

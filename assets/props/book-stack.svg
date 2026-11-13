@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+<title>Stack of books (original)</title>
+<rect x="38" y="128" width="124" height="26" fill="#31578c" rx="4"/><rect x="46" y="104" width="110" height="24" fill="#d64541" rx="4"/><rect x="56" y="80" width="92" height="24" fill="#2e8b6e" rx="4"/><rect x="48" y="134" width="14" height="14" fill="#f2ead8"/><rect x="56" y="110" width="14" height="12" fill="#f2ead8"/><rect x="64" y="86" width="14" height="12" fill="#f2ead8"/><path d="M96,44 l7,16 l17,2 l-12,11 l4,17 l-16,-9 l-15,9 l4,-17 l-12,-11 l17,-2 Z" fill="#e8b64c"/>
+</svg>
