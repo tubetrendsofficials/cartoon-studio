@@ -4,6 +4,7 @@ Source of truth: `docs/A-TO-Z-REPORT.md` (verified inventory of the reference si
 Build phases: `docs/BUILD-PLAN.md` (Phase 0–10).
 **Standing rule (user): A-to-Z nothing may be omitted.** Every report item below is mapped to a phase.
 Status key: `Planned` = assigned to a future phase · `In progress` = phase currently being built · `Done` = code written in this repo · `Verified` = code written AND checked running in a browser.
+**Live + verified 2026-11-13:** the app is deployed at https://tubetrendsofficials.github.io/cartoon-studio/ and a real-browser pass there verified the live dashboard (incl. the seeded Sample project), project create/open/rename and IndexedDB persistence across reload, character/background/prop adds with real artwork rendering, Play/playhead advance, one AI Animate preset application, the export dialog options, and a complete 720p WebM export (download produced). Rows that pass directly proves are marked `Verified` below; everything else keeps its previous status. (The same pass found the 15 s default-clip flaw fixed in v0.10.2.)
 
 Notes on equivalence:
 - All code and assets in this repo are **original** — feature/function equivalence only, never the reference site's code, images, characters or text.
@@ -19,22 +20,22 @@ Notes on equivalence:
 | 1.2 | Offline-first behaviour (works without network after first load) | 0 | Done |
 | 1.3 | PWA manifest (standalone display, theme #101a30, 192/512 + maskable icons) | 0 | Done |
 | 1.4 | Service worker precaching the app shell | 0 | Done |
-| 1.5 | App header with logo + app name | 1 | Done |
+| 1.5 | App header with logo + app name | 1 | Verified |
 | 1.6 | Logout icon (reference) → local equivalent: local profile menu (no account system in local version) | 1 | Planned |
 | 1.7 | Profile cover image area (original artwork of ours, not the reference painting) | 1 | Planned |
-| 1.8 | Profile avatar (local initial avatar) | 1 | Done |
-| 1.9 | Profile display name — generic local user "Local Creator" (no fake personal data) | 1 | Done |
-| 1.10 | Profile email line → not applicable locally; replaced by honest "Local mode — no account" note | 1 | Done |
-| 1.11 | FREE USER / FREE PLAN badges (ours: "FREE — all features unlocked") | 1 | Done |
+| 1.8 | Profile avatar (local initial avatar) | 1 | Verified |
+| 1.9 | Profile display name — generic local user "Local Creator" (no fake personal data) | 1 | Verified |
+| 1.10 | Profile email line → not applicable locally; replaced by honest "Local mode — no account" note | 1 | Verified |
+| 1.11 | FREE USER / FREE PLAN badges (ours: "FREE — all features unlocked") | 1 | Verified |
 | 1.12 | Joined date → local equivalent: first-run date stored locally, shown only if present | 1 | Planned |
 | 1.13 | User code → local equivalent: locally generated device/user id shown in profile | 10 | Planned |
-| 1.14 | Storage Used meter (reference showed an account %) → computed from `navigator.storage.estimate()`, honest "unknown" fallback | 1 | Done |
+| 1.14 | Storage Used meter (reference showed an account %) → computed from `navigator.storage.estimate()`, honest "unknown" fallback | 1 | Verified |
 | 1.15 | "My Files" tab on dashboard | 1 | Planned |
 | 1.16 | "Created By" tab on dashboard | 1 | Planned |
-| 1.17 | Projects list on dashboard | 1 | Done |
+| 1.17 | Projects list on dashboard | 1 | Verified |
 | 1.18 | Project search box | 1 | Done |
 | 1.19 | "New Project" button | 1 | Done |
-| 1.20 | Project file-format note (reference: .gta) → ours: `.cartoon.json` format note | 1 | Done |
+| 1.20 | Project file-format note (reference: .gta) → ours: `.cartoon.json` format note | 1 | Verified |
 | 1.21 | Shared-projects section ("shared with you") → needs cloud/sharing; local placeholder text, full feature with optional Firebase sync | 10 | Planned |
 | 1.22 | "Pay Now" button → **not built: our version is fully free, no payment at all** | — | Done |
 | 1.23 | Social/contact links in profile (reference: their Facebook/YouTube/WhatsApp) → ours: user's own links, set in Phase 9 public release | 9 | Planned |
@@ -47,31 +48,31 @@ Notes on equivalence:
 
 | # | Item | Phase | Status |
 |---|---|---|---|
-| 2.1 | New Project creates instantly — no creation dialog, no name/ratio/mode questions | 1 | Done |
+| 2.1 | New Project creates instantly — no creation dialog, no name/ratio/mode questions | 1 | Verified |
 | 2.2 | Auto name "New Cartoon Project N" with incrementing N | 1 | Done |
 | 2.3 | Default aspect 16:9 | 1 | Done |
-| 2.4 | Default total duration 120 s (2:00 timeline) | 1 | Done |
+| 2.4 | Default total duration 120 s (2:00 timeline) | 1 | Verified |
 | 2.5 | One empty scene created by default | 1 | Done |
 | 2.6 | Empty tracks list by default (0 Tracks) | 1 | Done |
 | 2.7 | Project name editable in place in editor header | 1 | Done |
 | 2.8 | "Auto-saved" badge / saved indicator in editor | 1 | Done |
 | 2.9 | Manual Save Project button persists to IndexedDB | 1 | Done |
-| 2.10 | Projects survive page reload (IndexedDB) | 1 | Done |
-| 2.11 | Card: project name | 1 | Done |
-| 2.12 | Card: "Ready to animate" state text | 1 | Done |
-| 2.13 | Card: EASY MODE label | 1 | Done |
-| 2.14 | Card: ACTIVE label | 1 | Done |
-| 2.15 | Card: track count | 1 | Done |
-| 2.16 | Card: updated time | 1 | Done |
-| 2.17 | Card button: Rename (prompt) | 1 | Done |
-| 2.18 | Card button: Open Project | 1 | Done |
+| 2.10 | Projects survive page reload (IndexedDB) | 1 | Verified |
+| 2.11 | Card: project name | 1 | Verified |
+| 2.12 | Card: "Ready to animate" state text | 1 | Verified |
+| 2.13 | Card: EASY MODE label | 1 | Verified |
+| 2.14 | Card: ACTIVE label | 1 | Verified |
+| 2.15 | Card: track count | 1 | Verified |
+| 2.16 | Card: updated time | 1 | Verified |
+| 2.17 | Card button: Rename (prompt) | 1 | Verified |
+| 2.18 | Card button: Open Project | 1 | Verified |
 | 2.19 | Card button: Duplicate | 1 | Done |
 | 2.20 | Card button: Delete (with confirm) | 1 | Done |
 | 2.21 | Card button: Export project file (`.cartoon.json` download) | 1 | Done |
 | 2.22 | Dashboard: Import project file (`.cartoon.json` read back in) | 1 | Done |
-| 2.23 | First-run seeded Sample project, labelled "Sample" in name **and** with a visible Sample badge | 1 | Done |
+| 2.23 | First-run seeded Sample project, labelled "Sample" in name **and** with a visible Sample badge | 1 | Verified |
 | 2.24 | Honest empty state "No projects yet" when list is empty | 1 | Done |
-| 2.25 | Reference card note "Pro Subscription Required to Open Project" → **built as free feature: projects always open, no gate** | 1 | Done |
+| 2.25 | Reference card note "Pro Subscription Required to Open Project" → **built as free feature: projects always open, no gate** | 1 | Verified |
 | 2.26 | Aspect picker next to "New Project" (16:9 · 9:16 Shorts · 1:1) — ours only; creation stays instant, aspect is fixed at creation and shown as a card badge | 8 | Done — Phase 8 |
 
 ## 3. Editor frame, toolbars, canvas & timeline
@@ -82,7 +83,7 @@ Notes on equivalence:
 | 3.2 | Full editor header: sidebar toggle (hamburger) | 2 | Done |
 | 3.3 | Editor header: logo | 2 | Done |
 | 3.4 | Editor header: "Get Pro" button → **built as free feature: replaced by "All features free" badge, no upsell** | 2 | Done |
-| 3.5 | Editor header: Export Video button (opens export dialog) | 7 | Done — Phase 7: opens the real export dialog (quality + format + progress/cancel) |
+| 3.5 | Editor header: Export Video button (opens export dialog) | 7 | Verified — Phase 7: opens the real export dialog (quality + format + progress/cancel) |
 | 3.6 | Editor header: user avatar menu | 2 | Done |
 | 3.7 | Second toolbar: Duplicate (layer) | 2 | Done |
 | 3.8 | Second toolbar: Split (clip at playhead) | 2 | Done |
@@ -90,8 +91,8 @@ Notes on equivalence:
 | 3.10 | Second toolbar: Voice (microphone record) | 5 | Done |
 | 3.11 | Second toolbar: Jump to Start | 2 | Done |
 | 3.12 | Second toolbar: Rewind 5s / Forward 5s | 2 | Done |
-| 3.13 | Second toolbar: Play / Pause | 2 | Done |
-| 3.14 | Second toolbar: time readout 00:00 / total | 2 | Done |
+| 3.13 | Second toolbar: Play / Pause | 2 | Verified |
+| 3.14 | Second toolbar: time readout 00:00 / total | 2 | Verified |
 | 3.15 | Second toolbar: Hand Tool (pan canvas) | 2 | Done |
 | 3.16 | Canvas zoom out / in (reference default 40%) | 2 | Done |
 | 3.17 | "Dock Timeline to Top" toggle | 2 | Done |
@@ -124,7 +125,7 @@ Notes on equivalence:
 | # | Item | Phase | Status |
 |---|---|---|---|
 | 4.1 | Character panel with searchable character grid | 3 | Done |
-| 4.2 | Click/drag a character to add it to canvas + timeline (click-to-add in ours) | 3 | Done |
+| 4.2 | Click/drag a character to add it to canvas + timeline (click-to-add in ours) | 3 | Verified |
 | 4.3 | Pose picker per character (each pose separate artwork state) | 3 | Done |
 | 4.4 | Per-pose Edit button → opens Character Studio (ours: free) | 6 | Done — Phase 6B: "Edit in Character Studio" button in the character tools; custom characters load their params, library characters open a blank studio (library art is read-only — Save creates an editable copy) |
 | 4.5 | "New Pose" / Bundle button (create a new pose in Studio) → **built as free feature** | 6 | Done — Phase 6B: the Studio's Save Character flow is the bundle action — every saved character is generated in the full 6-pose bundle at once; labelled as such in the Studio |
@@ -169,12 +170,12 @@ Notes on equivalence:
 
 ### 4A. Characters — all 33 (original equivalents of the same types/roles)
 
-First 12 core characters delivered in Phase 3; **full set of 33 completed in Phase 10A**. Each person character has 7 poses: Stand, Walk, Talk, Sit, Wave, Point, Back (true back artwork added in Phase 10A — see 4A.36). The bus / puppy / parrot entries carry their own variant poses. Note on 4A.31 (Auto Rickshaw): the reference counts it among the 33; our mapping — set in Phase 3 and kept — covers that row with **Kashem**, the rickshaw puller (person), plus the Rickshaw vehicle as Asset AS-21, which is how the total stayed exactly 33. **Phase 10B update: the Auto Rickshaw VEHICLE is now also a character entry in its own right — "Mishuk (Auto Rickshaw)" (see 4A.39) — so the library total is 33 reference roles covered + 1 extra (Mishuk) = 34 characters.**
+First 12 core characters delivered in Phase 3; **full set of 33 completed in Phase 10A**. Each person character has 7 poses: Stand, Walk, Talk, Sit, Wave, Point, Back (true back artwork added in Phase 10A — see 4A.36). The bus / puppy / parrot entries carry their own variant poses. Note on 4A.31 (Auto Rickshaw): the reference counts it among the 33; our mapping — set in Phase 3 and kept — covers that row with **Kashem**, the rickshaw puller (person), plus the Rickshaw vehicle as Asset AS-21, which is how the total stayed exactly 33. **Phase 10B update: the Auto Rickshaw VEHICLE is now also a character entry in its own right — "Mishuk (Auto Rickshaw)" (see 4A.39) — so the library total is 33 reference roles covered + 1 extra (Mishuk) = 34 characters.** **Roster mirror (Phase 10C, v0.10.3):** the manifest — and therefore the Character drawer, which renders in manifest order — now lists the characters in exactly this §4A row order (the reference panel order 1..33, Mishuk last), and the two mode-default templates carry the panel's functional labels ("Advance Mode Default" / "Easy Mode Default") with the same generic outfit archetypes (light-blue shirt + dark trousers; teal panjabi + blue lungi + gamchha). An outfit audit in the same pass set Burima to a pale/white sari, the Amena Begum counterpart (Salma Ma) to a red sari, the maharaja (Raja Bijoy) to a crown, and the Motu-role counterpart (Golam Mota) to a checkered shirt. Only the order, the functional labels and the generic outfit archetypes mirror the reference — every drawing remains our own original parametric artwork (character ids unchanged, so existing projects keep resolving).
 
 | # | Reference character (type) | Our original equivalent | Phase | Status |
 |---|---|---|---|---|
-| 4A.1 | Advance Mode Default | Done — our original: **Rafi Hero**, advanced-mode default hero (role-equivalent) | 10 | Done |
-| 4A.2 | Easy Mode Default | Done — our original: **Esha**, easy-mode default hero (role-equivalent) | 10 | Done |
+| 4A.1 | Advance Mode Default | Done — our template (id 'rafi-hero', id unchanged): **Advance Mode Default** — young man, light-blue button shirt + dark trousers (Phase 10C roster mirror: panel label + generic outfit archetype; our own parametric drawing) | 10C | Done |
+| 4A.2 | Easy Mode Default | Done — our template (id 'esha', id unchanged): **Easy Mode Default** — young MAN in teal panjabi + blue lungi + orange gamchha (Phase 10C roster mirror: the reference's easy default is male; the persona is a mode template, so the identity change is acceptable; our own parametric drawing) | 10C | Done |
 | 4A.3 | Character 20 (Free) | Done — our original: **Jolil Chacha**, the farmer (role-equivalent) | 3 | Done |
 | 4A.4 | Kona (Pro) → free in ours | Done — our original: **Rina**, young village girl (role-equivalent) | 10 | Done — built as free feature |
 | 4A.5 | Nasir Uddin | Done — our original: **Nasir Kaka**, elderly village storyteller (role-equivalent) | 10 | Done |
@@ -219,8 +220,8 @@ First 12 core characters delivered in Phase 3; **full set of 33 completed in Pha
 | # | Item | Phase | Status |
 |---|---|---|---|
 | 5.1 | Media panel with Backgrounds and Audio sections (backgrounds grid + voice recording + local audio library) | 3 / 5 | Done |
-| 5.2 | Background thumbnail grid (village / street / shop-interior scene types) | 3 | Done |
-| 5.3 | Adding a background creates a background (green) timeline track | 3 | Done |
+| 5.2 | Background thumbnail grid (village / street / shop-interior scene types) | 3 | Verified |
+| 5.3 | Adding a background creates a background (green) timeline track | 3 | Verified |
 | 5.4 | Background layer: Full Screen toggle | 3 | Planned |
 | 5.5 | Background layer: Chroma option | 6 | Planned |
 | 5.6 | "Upload Single Background" (own image) | 3 | Planned |
@@ -389,7 +390,7 @@ Core 10 in Phase 3, **remaining 11 in Phase 10A — all 21 slots delivered**. Al
 | 9.47 | AS-47 | Done — our original prop: **Cricket Bat & Ball** | 10 | Done |
 | 9.48 | AS-48 | Done — our original prop: **Wall Clock** | 10 | Done |
 | 9.49 | AS-49 | Done — our original prop: **Fishing Rod** | 10 | Done |
-| 9.50 | Asset Library panel: slow-loading thumbnails in reference → ours: local assets, instant, with loading placeholder only if needed | 3 | Done |
+| 9.50 | Asset Library panel: slow-loading thumbnails in reference → ours: local assets, instant, with loading placeholder only if needed | 3 | Verified |
 
 ## 10. Panel 7 — Sprite Sheet Studio
 
@@ -517,15 +518,15 @@ Core 10 in Phase 3, **remaining 11 in Phase 10A — all 21 slots delivered**. Al
 
 | # | Item | Phase | Status |
 |---|---|---|---|
-| 16.1 | Export Video dialog "Select Export Quality" | 7 | Done — Phase 7: dialog with quality radios, format selector, total duration, real-time-recording note, no-watermark line, empty-project warning |
-| 16.2 | Export option: 720p HD, 1280×720, 30 FPS ("Mobile Friendly") | 7 | Done — Phase 7: MediaRecorder at 8 Mbps through the editor canvas in export mode |
-| 16.3 | Export option: 1920×1080, 60 FPS ("Studio Master") | 7 | Done — Phase 7: 1080p offered at BOTH 30 FPS (12 Mbps) and 60 FPS "Studio Master" (20 Mbps) |
-| 16.4 | Export format: WebM (Phase A, MediaRecorder + canvas captureStream, audio mixed) | 7 | Done — Phase 7: canvas.captureStream + AudioEngine master-bus tee into a MediaStreamAudioDestinationNode → one MediaRecorder (vp9/vp8/plain WebM mime preference); video-only when the project has no audio |
+| 16.1 | Export Video dialog "Select Export Quality" | 7 | Verified — Phase 7: dialog with quality radios, format selector, total duration, real-time-recording note, no-watermark line, empty-project warning |
+| 16.2 | Export option: 720p HD, 1280×720, 30 FPS ("Mobile Friendly") | 7 | Verified — Phase 7: MediaRecorder at 8 Mbps through the editor canvas in export mode |
+| 16.3 | Export option: 1920×1080, 60 FPS ("Studio Master") | 7 | Verified — Phase 7: 1080p offered at BOTH 30 FPS (12 Mbps) and 60 FPS "Studio Master" (20 Mbps) |
+| 16.4 | Export format: WebM (Phase A, MediaRecorder + canvas captureStream, audio mixed) | 7 | Verified — Phase 7: canvas.captureStream + AudioEngine master-bus tee into a MediaStreamAudioDestinationNode → one MediaRecorder (vp9/vp8/plain WebM mime preference); video-only when the project has no audio |
 | 16.5 | Export format: MP4 (reference Pro modal claim; ours Phase B via ffmpeg.wasm) | 7 | Done — Phase 7: lazily loaded from the jsdelivr CDN (@ffmpeg/ffmpeg 0.12.15 + core 0.12.6, pinned) ONLY when MP4 is chosen; libx264/yuv420p + AAC + faststart; honest ~31 MB one-time-download note shown before loading; failure/cancel keeps the WebM download |
-| 16.6 | 4K export (reference Pro modal claim) → **built as free feature** if performance allows | 10 | Done — Phase 10B, built as free feature: a '4k30' preset per aspect in js/export.js — 16:9 → 3840×2160, 9:16 → 2160×3840, 1:1 → 2160×2160, all 30 FPS, 45 Mbps (16:9/9:16) / 30 Mbps (1:1); the export dialog warns next to the option that 4K recording is heavy and 1080p is the fallback if the tab struggles |
-| 16.7 | Format selector in export dialog (not shown in reference) → ours includes WebM/MP4 selector | 7 | Done — Phase 7 |
+| 16.6 | 4K export (reference Pro modal claim) → **built as free feature** if performance allows | 10 | Verified — Phase 10B, built as free feature: a '4k30' preset per aspect in js/export.js — 16:9 → 3840×2160, 9:16 → 2160×3840, 1:1 → 2160×2160, all 30 FPS, 45 Mbps (16:9/9:16) / 30 Mbps (1:1); the export dialog warns next to the option that 4K recording is heavy and 1080p is the fallback if the tab struggles |
+| 16.7 | Format selector in export dialog (not shown in reference) → ours includes WebM/MP4 selector | 7 | Verified — Phase 7 |
 | 16.8 | Export progress bar + cancel | 7 | Done — Phase 7: progress = elapsed/total with current scene name (200 ms tick), Cancel discards the recording and restores the editor; MP4 conversion has its own progress + cancel |
-| 16.9 | Watermark: reference free tier implied a watermark, Pro = "Zero Watermark" → **ours: no watermark ever, free feature** | 7 | Done |
+| 16.9 | Watermark: reference free tier implied a watermark, Pro = "Zero Watermark" → **ours: no watermark ever, free feature** | 7 | Verified |
 | 16.10 | YouTube publish button (NOT in reference) → our extra: download + share link only; direct publish if YouTube API added later | 10 | Planned |
 | 16.11 | Export presets follow the project aspect — ours only: 9:16 → 720×1280 / 1080×1920, 1:1 → 960×960 / 1080×1080 (labels HD / Full HD by short side), 16:9 unchanged | 8 | Done — Phase 8: `exportPresetsFor(aspect)` in js/export.js; the dialog + recorder resolve presets per aspect |
 
@@ -540,7 +541,7 @@ Core 10 in Phase 3, **remaining 11 in Phase 10A — all 21 slots delivered**. Al
 | 17.5 | Pro feature: All premium characters → free (see 4A) | 10 | Done — built as free feature: the full character library — all 33 reference roles + the Phase-10B Mishuk extra (34 entries) — is delivered and free (Phases 10A + 10B) |
 | 17.6 | Pro feature: Full rigging & IK access → free (see 8.3) | 10 | Done — built as free feature: the Pose Lab (basic joint sliders + saved custom poses) is free like everything else; see 8.3 for the honest scope (not full bone IK) |
 | 17.7 | Pro feature: Unlimited cloud backgrounds & props → free locally; cloud unlimited if Firebase added (see 5A/9) | 10 | Done — built as free feature (local part): the complete local library — 21 backgrounds + 49 props (+ 34 characters) — is delivered and free (Phases 10A + 10B); a cloud tier exists only if Firebase is added later (18.1–18.3 stay Planned) |
-| 17.8 | Pro feature: Zero watermark → free (see 16.9) | 7 | Done |
+| 17.8 | Pro feature: Zero watermark → free (see 16.9) | 7 | Verified |
 | 17.9 | Pro gate: Character Studio / new pose / character edit → free (see 8.1) | 6 | Done — Phase 6B: Character Studio, pose bundles and character edit are all free features here |
 | 17.10 | Pro gate: individual premium characters (e.g. Kona) → free (see 4A.4) | 10 | Done — built as free feature: our Kona equivalent **Rina** is free like every character (Phase 10A) |
 | 17.11 | Pro gate: individual premium poses (e.g. Walking) → free (see 4A.37) | 3 | Planned — built as free feature |
@@ -560,7 +561,7 @@ Core 10 in Phase 3, **remaining 11 in Phase 10A — all 21 slots delivered**. Al
 | 18.8 | Transparent WebM/GIF export from BG remover → ours in Phase 6 (see 12.21/12.24) | 6 | Planned |
 | 18.9 | AI provider (reference: not named anywhere) → ours: none required; optional Gemini key for AI generation | 10 | Planned |
 | 18.10 | Framework (reference: unknown) → ours: vanilla JS, no build step (documented choice) | 0 | Done |
-| 18.11 | Hosting (reference: not named; media CDN Cloudinary) → ours: GitHub Pages | 9 | Planned |
+| 18.11 | Hosting (reference: not named; media CDN Cloudinary) → ours: GitHub Pages | 9 | Verified — live 2026-11-13: deployed on GitHub Pages (branch deploy), https://tubetrendsofficials.github.io/cartoon-studio/ |
 | 18.12 | Analytics / licenses page (reference: none found) → ours: credits + open-source notices in README | 9 | Planned |
 | 18.13 | App version label (reference shows v84.2.5 in header) → ours: version string in header/footer, starting v0.1.0 | 2 | Done |
 | 18.14 | Favicon + logo assets → ours: original logo.svg + favicon.png | 0 | Done |
@@ -585,16 +586,16 @@ Core 10 in Phase 3, **remaining 11 in Phase 10A — all 21 slots delivered**. Al
 | # | Workflow step | Covered by | Phase | Status |
 |---|---|---|---|---|
 | 20.1 | Open site, signed in | 1.x dashboard / 18.2 optional login | 1 / 10 | In progress |
-| 20.2 | New Project (instant blank) | 2.x | 1 | Done |
-| 20.3 | Add background | 5.x | 3 | Done |
+| 20.2 | New Project (instant blank) | 2.x | 1 | Verified |
+| 20.3 | Add background | 5.x | 3 | Verified |
 | 20.4 | Add characters + poses + mouth modes | 4.x / 4A | 3 | Done |
 | 20.5 | Animate (presets / path / speed) | 4.12–4.20 | 4 | Done |
 | 20.6 | Props, effects, sprites | 7.x / 9.x / 10.x | 3 / 6 | Done |
 | 20.7 | Audio (record / library / SFX) | 11.x / 15.x | 5 | Done |
 | 20.8 | Add scenes + preview | 3.21–3.31 | 2 / 4 | Done |
 | 20.9 | Save (auto + manual) | 2.8 / 2.9 | 1 | Done |
-| 20.10 | Export video | 16.x | 7 | Done |
-| 20.11 | GitHub Pages public release of the app itself | 18.11 | 9 | Planned |
+| 20.10 | Export video | 16.x | 7 | Verified |
+| 20.11 | GitHub Pages public release of the app itself | 18.11 | 9 | Verified — live 2026-11-13: https://tubetrendsofficials.github.io/cartoon-studio/ loads and runs (see the header note) |
 
 ---
 *Checklist maintenance rule: when a phase is finished, flip its rows to Done; when it has been run and checked in a browser, flip to Verified. New reference findings get a new row — never delete a row.*

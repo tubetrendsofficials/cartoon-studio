@@ -176,7 +176,7 @@ let ACTIVE_STAGE = { w: STAGE_W, h: STAGE_H };
 export function activeStageDims() { return ACTIVE_STAGE; }
 function setActiveStage(dims) { ACTIVE_STAGE = { w: dims.w, h: dims.h }; }
 
-const APP_VERSION = 'v0.10.1 · Phases 0–8 + 10';
+const APP_VERSION = 'v0.10.3 · Phases 0–8 + 10';
 const HISTORY_CAP = 50;
 
 /* The 12 reference panels. `note` = honest phase note shown in the drawer. */
@@ -392,6 +392,43 @@ function drawWearables(c, layer, w, h, onLoad) {
     const dw = w * def.wFrac, dh = dw; /* wearable viewBoxes are square */
     c.drawImage(entry.img, (def.fx - 0.5) * w - dw / 2, (def.fy - 0.5) * h - dh / 2, dw, dh);
   }
+}
+
+/* v0.10.2 (live fix): character/prop layers added from a drawer used to
+   get a fixed 15 s clip, so in a 2:00 scene they vanished mid-scene
+   (seen on the live site: by 00:17 only the background was left), and
+   successive adds stacked on nearly the same spot. New character/prop
+   layers now span from their start to the END of the scene, and spawn
+   with a small cascade offset. The two computations are pure and
+   dependency-free so they can be unit-tested headlessly. */
+const CHAR_PROP_KINDS = ['character', 'prop', 'sample-character', 'sample-prop'];
+const CASCADE_STEP_PX = 28;
+const CASCADE_STEPS = 8; /* spawn offsets cycle 0..7 steps (0–196 px) */
+
+function charPropLayerCount(sc) {
+  return sc && Array.isArray(sc.layers)
+    ? sc.layers.filter((l) => CHAR_PROP_KINDS.includes(l.kind)).length : 0;
+}
+
+/* Clip length for a new character/prop layer: from its start to scene end. */
+function fullSceneClipDur(startSec, sceneDur) {
+  const dur = Number.isFinite(sceneDur) && sceneDur > 0 ? sceneDur : 0;
+  const start = Number.isFinite(startSec) ? Math.max(0, Math.min(startSec, dur)) : 0;
+  return Math.max(0.5, dur - start);
+}
+
+/* Cascade spawn point: base + 28 px diagonally per character/prop layer
+   already in the scene, cycling every 8 adds, clamped inside the stage. */
+function cascadeSpawnPos(baseX, baseY, priorCount, dims) {
+  const w = dims && Number.isFinite(dims.w) && dims.w > 0 ? dims.w : 1280;
+  const h = dims && Number.isFinite(dims.h) && dims.h > 0 ? dims.h : 720;
+  const n = Number.isFinite(priorCount) && priorCount > 0 ? Math.floor(priorCount) : 0;
+  const off = (n % CASCADE_STEPS) * CASCADE_STEP_PX;
+  const m = 48; /* keep the spawn centre at least this far inside the stage */
+  return {
+    x: Math.min(Math.max(baseX + off, m), Math.max(m, w - m)),
+    y: Math.min(Math.max(baseY + off, m), Math.max(m, h - m))
+  };
 }
 
 function defaultLayerFields(layer, sceneDur, dims) {
@@ -3418,16 +3455,24 @@ export async function renderEditor(root, projectId, { onBack } = {}) {
     commit(() => {
       const sc = scene();
       const n = sc.layers.filter((l) => l.kind === kind).length;
+      const isBg = kind === 'sample-background';
+      const startSec = isBg ? 0 : Math.floor(S.playhead);
+      /* v0.10.2: sample character/prop layers cascade-spawn and run to
+         the end of the scene, like real character/prop layers; the
+         sample background stays pinned centre + full-scene as before. */
+      const pos = isBg ? { x: sd.w / 2, y: sd.h / 2 }
+        : cascadeSpawnPos(Math.min(560, sd.w / 2), Math.min(400, Math.round(sd.h * 0.5556)),
+          charPropLayerCount(sc), sd);
       const layer = defaultLayerFields({
         id: uid(),
         kind,
         name: def.name + (n ? ' ' + (n + 1) : ''),
         color: def.color,
         /* Phase 8: spawn points scale with the stage (identical at 16:9). */
-        x: kind === 'sample-background' ? sd.w / 2 : Math.min(560, sd.w / 2) + (n % 4) * 70,
-        y: kind === 'sample-background' ? sd.h / 2 : Math.min(400, Math.round(sd.h * 0.5556)),
-        startSec: kind === 'sample-background' ? 0 : Math.floor(S.playhead),
-        durSec: kind === 'sample-background' ? sc.durationSec : Math.min(15, sc.durationSec)
+        x: pos.x,
+        y: pos.y,
+        startSec,
+        durSec: isBg ? sc.durationSec : fullSceneClipDur(startSec, sc.durationSec)
       }, sc.durationSec, sd);
       sc.layers.push(layer);
       S.selectedId = layer.id;
@@ -3501,9 +3546,13 @@ export async function renderEditor(root, projectId, { onBack } = {}) {
   function addCharacterLayer(assetId) {
     const ch = getCharacterDef(assetId);
     if (!ch) return;
+    const sd = stageDims(project);
     commit(() => {
       const sc = scene();
-      const n = sc.layers.filter((l) => l.kind === 'character').length;
+      const startSec = Math.floor(S.playhead);
+      /* v0.10.2: cascade spawn + clip runs to the end of the scene. */
+      const pos = cascadeSpawnPos(Math.round(sd.w * 0.4375), Math.round(sd.h * 0.5764),
+        charPropLayerCount(sc), sd);
       const layer = defaultLayerFields({
         id: uid(),
         kind: 'character',
@@ -3512,10 +3561,10 @@ export async function renderEditor(root, projectId, { onBack } = {}) {
         poseId: ch.poses[0].id,
         color: ASSET_COLOR.character,
         /* Spawn point scales with the stage (560×415 at 16:9). */
-        x: Math.round(stageDims(project).w * 0.4375) + (n % 4) * 60,
-        y: Math.round(stageDims(project).h * 0.5764),
-        startSec: Math.floor(S.playhead),
-        durSec: Math.min(15, sc.durationSec)
+        x: pos.x,
+        y: pos.y,
+        startSec,
+        durSec: fullSceneClipDur(startSec, sc.durationSec)
       }, sc.durationSec);
       sc.layers.push(layer);
       S.selectedId = layer.id;
@@ -3570,9 +3619,13 @@ export async function renderEditor(root, projectId, { onBack } = {}) {
   function addPropLayer(assetId) {
     const pr = S.assets && findProp(S.assets, assetId);
     if (!pr) return;
+    const sd = stageDims(project);
     commit(() => {
       const sc = scene();
-      const n = sc.layers.filter((l) => l.kind === 'prop').length;
+      const startSec = Math.floor(S.playhead);
+      /* v0.10.2: cascade spawn + clip runs to the end of the scene. */
+      const pos = cascadeSpawnPos(Math.round(sd.w * 0.4844), Math.round(sd.h * 0.6111),
+        charPropLayerCount(sc), sd);
       const layer = defaultLayerFields({
         id: uid(),
         kind: 'prop',
@@ -3580,10 +3633,10 @@ export async function renderEditor(root, projectId, { onBack } = {}) {
         assetId: pr.id,
         color: ASSET_COLOR.prop,
         /* Spawn point scales with the stage (620×440 at 16:9). */
-        x: Math.round(stageDims(project).w * 0.4844) + (n % 4) * 55,
-        y: Math.round(stageDims(project).h * 0.6111),
-        startSec: Math.floor(S.playhead),
-        durSec: Math.min(15, sc.durationSec)
+        x: pos.x,
+        y: pos.y,
+        startSec,
+        durSec: fullSceneClipDur(startSec, sc.durationSec)
       }, sc.durationSec);
       sc.layers.push(layer);
       S.selectedId = layer.id;

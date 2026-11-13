@@ -73,7 +73,7 @@ export async function renderDashboard(root, { onOpen } = {}) {
         <span>Cartoon Studio</span>
       </div>
       <div class="spacer"></div>
-      <span class="version">v0.10.1 · Phases 0–8 + 10</span>
+      <span class="version">v0.10.3 · Phases 0–8 + 10</span>
       <div class="avatar" title="Local Creator">L</div>
     </header>
     <main class="wrap">

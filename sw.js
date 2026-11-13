@@ -1,5 +1,5 @@
 /* Cartoon Studio — service worker (offline-first app shell) */
-const CACHE_NAME = 'cartoon-studio-v11';
+const CACHE_NAME = 'cartoon-studio-v13';
 const PRECACHE = [
   './',
   './index.html',

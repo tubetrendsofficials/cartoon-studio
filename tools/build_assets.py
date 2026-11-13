@@ -218,6 +218,14 @@ def _torso(cfg, sitting=False):
     else:  # shirt / tee
         out.append(rect(108, 166, 84, bottom_y - 166, tc, rx=14))
         out.append(poly([(136, 164), (164, 164), (150, 184)], cfg.get('collar', '#ffffff')))
+        if cfg.get('checkered'):
+            chk = cfg['checkered']
+            for xx in (124, 140, 156, 172):
+                out.append(rect(xx, 174, 5, bottom_y - 180, chk, opacity=0.28))
+            yy = 198
+            while yy < bottom_y - 16:
+                out.append(rect(114, yy, 72, 5, chk, opacity=0.28))
+                yy += 30
         if style == 'shirt':
             for yy in (210, 244, 278):
                 out.append(circle(150, yy, 3.4, 'rgba(0,0,0,0.35)'))
@@ -316,6 +324,12 @@ def _head(cfg, pose):
         out.append(path('M100,86 Q98,38 150,36 Q202,38 200,86 Q170,56 150,58 Q128,58 100,86 Z', fill=wc))
         out.append(rect(98, 78, 104, 12, wc, rx=6))
         out.append(path('M196,84 L214,140 L196,146 L188,96 Z', fill=wc))  # hanging tail
+    elif hair == 'crown':
+        # generic royal crown over a short hair mass (maharaja archetype)
+        out.append(path('M103,92 Q100,44 150,42 Q200,44 197,92 Q186,60 150,58 Q114,60 103,92 Z', fill=hairc))
+        out.append(path('M108,64 L112,34 L130,52 L142,28 L150,46 L158,28 L170,52 L188,34 L192,64 Q150,50 108,64 Z', fill='#e8b64c'))
+        out.append(rect(106, 60, 88, 9, '#c9962e', rx=4))
+        out.append(circle(150, 55, 5.5, '#c0272d'))
     elif hair == 'long':
         out.append(path('M103,92 Q100,42 150,40 Q200,42 197,92 Q184,58 150,56 Q116,58 103,92 Z', fill=hairc))
         if cfg.get('ribbons'):
@@ -387,6 +401,10 @@ def _head_back(cfg):
         out.append(path('M100,88 Q98,38 150,36 Q202,38 200,88 L200,118 Q196,148 150,150 Q104,148 100,118 Z', fill=wc))
         out.append(rect(98, 80, 104, 12, wc, rx=6))
         out.append(path('M188,92 L206,168 L184,172 L176,100 Z', fill=wc))  # hanging tail
+    elif hair == 'crown':
+        out.append(circle(150, 96, 47, hairc))
+        out.append(path('M108,64 L112,34 L130,52 L142,28 L150,46 L158,28 L170,52 L188,34 L192,64 Q150,50 108,64 Z', fill='#e8b64c'))
+        out.append(rect(106, 60, 88, 9, '#c9962e', rx=4))
     elif hair == 'long':
         out.append(path('M102,94 Q98,44 150,42 Q202,44 198,94 Q190,58 150,56 Q110,58 102,94 Z', fill=hairc))
         if cfg.get('ribbons'):
@@ -446,6 +464,12 @@ def _torso_back(cfg):
         out.append(rect(108, 166, 84, 140, tc, rx=14))
         out.append(rect(132, 160, 36, 12, cfg.get('collar', '#ffffff'), rx=5))
         out.append(line(112, 202, 188, 202, 'rgba(0,0,0,0.10)', 4))
+        if cfg.get('checkered'):
+            chk = cfg['checkered']
+            for xx in (124, 140, 156, 172):
+                out.append(rect(xx, 174, 5, 126, chk, opacity=0.28))
+            for yy in (228, 258, 288):
+                out.append(rect(114, yy, 72, 5, chk, opacity=0.28))
     if cfg.get('apron'):
         out.append(line(112, 252, 188, 252, cfg['apron'], 9))               # apron tie
         out.append(poly([(150, 252), (138, 278), (150, 269), (162, 278)], cfg['apron']))
@@ -524,7 +548,7 @@ CHARACTERS = [
     dict(id='rokeya-burima', name='Rokeya Burima', role='Grandmother',
          tags='grandmother elder woman sari glasses',
          skin='#b57e4e', hair='bun', hairColor='#cfccc4', glasses=True,
-         top='sari', topColor='#6d439e', drape='#845ec2', border='#e8b64c',
+         top='sari', topColor='#f0ead9', drape='#e6dfca', border='#c2a15c',
          bottom='sari'),
     dict(id='arif', name='Arif', role='Young boy',
          tags='young boy kid school child',
@@ -565,7 +589,7 @@ CHARACTERS = [
     dict(id='salma', name='Salma Ma', role='Mother in sari',
          tags='mother woman sari village home',
          skin='#c68850', hair='bun', hairColor='#2b2320',
-         top='sari', topColor='#b03a5b', drape='#cf4f74', border='#e8b64c',
+         top='sari', topColor='#c0272d', drape='#d93a41', border='#e8b64c',
          bottom='sari'),
     dict(id='boltu', name='Boltu', role='Village kid with cap',
          tags='kid boy cap playful village child',
@@ -579,16 +603,21 @@ CHARACTERS = [
          bottom='lungi', bottomColor='#274156', waistColor='#16283a',
          accessory='oar'),
     # ---- Phase 10A: the remaining role rows (all original characters) ----
-    dict(id='rafi-hero', name='Rafi Hero', role='Advanced-mode default hero',
-         tags='hero default advanced young man lead',
-         skin='#a06a3b', hair='spiky',
-         top='shirt', topColor='#31578c', collar='#f2a007',
-         bottom='trousers', bottomColor='#374f63'),
-    dict(id='esha', name='Esha', role='Easy-mode default hero',
-         tags='hero default easy young girl lead ribbons',
-         skin='#c68850', hair='long', hairColor='#33241c', ribbons='#2e8b6e',
-         top='frock', topColor='#2e8b6e',
-         bottom='skirt', bottomColor='#26735c', blush=True),
+    # Phase 10C roster mirror: the two mode-default templates carry the
+    # reference panel's functional labels and generic outfit archetypes
+    # (ids unchanged — 'rafi-hero' / 'esha' — so existing projects keep
+    # resolving; artwork is still our own parametric drawing).
+    dict(id='rafi-hero', name='Advance Mode Default', role='Advanced-mode default template',
+         tags='default advanced template young man shirt office lead',
+         skin='#a06a3b', hair='short',
+         top='shirt', topColor='#8fc1ee', collar='#4a7ab5',
+         bottom='trousers', bottomColor='#33333f'),
+    dict(id='esha', name='Easy Mode Default', role='Easy-mode default template',
+         tags='default easy template young man panjabi lungi gamchha',
+         skin='#a06a3b', hair='short',
+         top='panjabi', topColor='#1f7a6d', collar='#2e9e8b',
+         bottom='lungi', bottomColor='#31578c', waistColor='#22354f',
+         gamchha='#d9762e'),
     dict(id='rina', name='Rina', role='Young village girl',
          tags='young village girl kid frock',
          skin='#b57e4e', hair='long', hairColor='#26201c',
@@ -601,8 +630,8 @@ CHARACTERS = [
          bottom='lungi', bottomColor='#5b729e', waistColor='#374f63',
          accessory='stick'),
     dict(id='raja-bijoy', name='Raja Bijoy', role='King / maharaja',
-         tags='king maharaja royal turban palace',
-         skin='#a06a3b', hair='wrap', capColor='#e8b64c',
+         tags='king maharaja royal crown palace',
+         skin='#a06a3b', hair='crown',
          top='panjabi', topColor='#8e2f45', collar='#e8b64c',
          bottom='trousers', bottomColor='#f0e7d2'),
     dict(id='bablu', name='Bablu', role='Strong village kid',
@@ -611,9 +640,9 @@ CHARACTERS = [
          top='tee', topColor='#e07a2f', collar='#274156',
          bottom='shorts', bottomColor='#274156', blush=True),
     dict(id='golam-mota', name='Golam Mota', role='Plump comic man',
-         tags='plump comic funny man village',
+         tags='plump comic funny man village checkered shirt',
          skin='#b57e4e', hair='short',
-         top='shirt', topColor='#c9a227', collar='#7a5a14',
+         top='shirt', topColor='#c9a227', collar='#7a5a14', checkered='#7a5a14',
          bottom='trousers', bottomColor='#6d4525', blush=True),
     dict(id='imam-hafiz', name='Imam Hafiz', role='Cleric / molla',
          tags='cleric molla imam beard tupi religious man',
@@ -2044,10 +2073,25 @@ PROPS = [
 
 # ---------------------------------------------------------------------- main
 
+# Phase 10C roster mirror: the Character drawer renders in manifest order,
+# and the manifest lists characters in the §4A role order — the reference
+# panel order 1..33 — with the Phase-10B Mishuk extra last (34th). Only the
+# ORDER and the generic role/outfit archetypes mirror the reference; every
+# drawing is our own parametric artwork.
+ROSTER_ORDER = [
+    'rafi-hero', 'esha', 'jolil', 'rina', 'nasir-kaka', 'mitu', 'raja-bijoy',
+    'karim-dadu', 'sattar', 'rofiq-police', 'boltu', 'bablu', 'golam-mota',
+    'nader', 'imam-hafiz', 'salma', 'rokeya-burima', 'harun-sir', 'hamid',
+    'tahiya', 'ginni-bou', 'mizan-mia', 'lal-chand', 'camili', 'nurjahan',
+    'arif', 'priya', 'sultan-ashraf', 'gopal', 'village-bus', 'kashem',
+    'bhulu-puppy', 'tiya-parrot', 'mishuk-rickshaw',
+]
+
 def main():
     manifest = {'version': 2,
-                'note': 'Cartoon Studio original asset library v2 (Phase 10A full set + Phase 10B Mishuk extra) — generated by tools/build_assets.py',
+                'note': 'Cartoon Studio original asset library v2 (Phase 10A full set + Phase 10B Mishuk extra + Phase 10C roster-mirror order) — generated by tools/build_assets.py',
                 'characters': [], 'backgrounds': [], 'props': []}
+    char_entries = []
 
     for cfg in CHARACTERS:
         entry = {'id': cfg['id'], 'kind': 'character', 'name': cfg['name'],
@@ -2057,7 +2101,7 @@ def main():
             rel = f"characters/{cfg['id']}-{pose_id}.svg"
             write(rel, person_svg(cfg, pose_id))
             entry['poses'].append({'id': pose_id, 'label': label, 'file': rel})
-        manifest['characters'].append(entry)
+        char_entries.append(entry)
 
     for spec in SPECIAL_CHARACTERS:
         entry = {'id': spec['id'], 'kind': 'character', 'name': spec['name'],
@@ -2067,7 +2111,11 @@ def main():
             rel = f"characters/{spec['id']}-{pose_id}.svg"
             write(rel, spec['builder'](pose_id))
             entry['poses'].append({'id': pose_id, 'label': label, 'file': rel})
-        manifest['characters'].append(entry)
+        char_entries.append(entry)
+
+    by_id = {e['id']: e for e in char_entries}
+    assert set(by_id) == set(ROSTER_ORDER), 'roster order / character set mismatch'
+    manifest['characters'] = [by_id[cid] for cid in ROSTER_ORDER]
 
     for bid, name, fn, tags in BACKGROUNDS:
         rel = f'backgrounds/{bid}.svg'
