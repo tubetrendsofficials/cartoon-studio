@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Cartoon Studio logo">
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="#101a30"/>
+  <rect x="16" y="16" width="480" height="480" rx="96" fill="none" stroke="#22345c" stroke-width="8"/>
+  <!-- cartoon face -->
+  <circle cx="256" cy="212" r="118" fill="#ffd9a0"/>
+  <circle cx="212" cy="196" r="16" fill="#101a30"/>
+  <circle cx="300" cy="196" r="16" fill="#101a30"/>
+  <circle cx="218" cy="190" r="5" fill="#ffffff"/>
+  <circle cx="306" cy="190" r="5" fill="#ffffff"/>
+  <ellipse cx="168" cy="238" rx="20" ry="12" fill="#ffb59e"/>
+  <ellipse cx="344" cy="238" rx="20" ry="12" fill="#ffb59e"/>
+  <path d="M206 252 Q256 296 306 252" fill="none" stroke="#101a30" stroke-width="12" stroke-linecap="round"/>
+  <!-- orange play triangle -->
+  <path d="M196 356 L356 424 L196 492 Z" fill="#ff8c1a" stroke="#ffffff" stroke-width="10" stroke-linejoin="round" transform="translate(0,-34) scale(0.92) translate(22,18)"/>
+</svg>
